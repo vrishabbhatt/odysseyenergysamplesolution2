@@ -160,7 +160,7 @@ class RecieptGeneratorV1 extends RecieptGeneratorBase {
                     const prompt = createPrompt(item, itemTypesArr[i]);
                     const response = await openAI.completion(prompt);
 
-                    console.log('response: ', response);
+                    // console.log('response: ', response);
                     
                     if(parseInt(response) == 1){
                         itemType = itemTypesArr[i];

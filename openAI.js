@@ -38,10 +38,3 @@ class OpenAIWrapper {
 
 const openAI = new OpenAIWrapper();
 module.exports = openAI;
-
-
-(async () => {
-    const content = 'is chocolate bar a type of food? answer 1 for yes, 0 for no';
-    const response = await openAI.completion(content);
-    console.log(response);
-})();
