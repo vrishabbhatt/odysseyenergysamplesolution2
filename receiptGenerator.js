@@ -75,7 +75,7 @@ class RecieptGeneratorV0 extends RecieptGeneratorBase {
     generate(input){
         try{
             const items = input.split("\n");
-            console.log(items);
+            // console.log(items);
 
 
             items.forEach((itemStr) => {
@@ -140,7 +140,8 @@ class RecieptGeneratorV1 extends RecieptGeneratorBase {
     async generate(input){
         try{
             const items = input.split("\n");
-            console.log(items);
+            // console.log(items);
+
             await Promise.all(items.map(async (itemStr) => {
                 const itemString = cleanItemString(itemStr);
                 const itemDetails = parseItemString(itemString);
