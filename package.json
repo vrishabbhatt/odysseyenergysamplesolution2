@@ -1,0 +1,14 @@
+{
+  "name": "recieptgenerator",
+  "version": "1.0.0",
+  "description": "package to generate sample receipts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "vrishab b",
+  "license": "ISC",
+  "dependencies": {
+    "openai": "^4.4.0"
+  }
+}
