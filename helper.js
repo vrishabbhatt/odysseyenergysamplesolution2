@@ -58,6 +58,7 @@ const parseItemString = (itemStr) => {
     }
     catch(err){
         console.log('helper:parseItemString:err parsing item string ', err);
+        throw err;
     }
 
 };
