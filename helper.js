@@ -27,17 +27,14 @@ const parseItemString = (itemStr) => {
     
         quantity = parseInt(itemStr.slice(0, quantityBreakPoint));
         if(quantity === NaN) throw new Error('incorrect input format, unable to get quantity');
-        console.log('quantity: ', quantity);
     
         itemStr = itemStr.slice(quantityBreakPoint)
-        console.log('itemStr: ', itemStr);
     
         //get price by splitting using at
         const valueBreakPoint = itemStr.indexOf(' at '); //cannot use plain 'at' items can have the term at in them
         if(!valueBreakPoint) throw new Error('incorrect input format, unable to get value');
     
         let [displayString, valueString] = itemStr.split(' at ');
-        console.log('valueString: ', valueString);
     
         unitPrice = parseFloat(valueString);
         if(isNaN(unitPrice)) throw new Error('incorrect input format, unable to convert value');
@@ -47,10 +44,10 @@ const parseItemString = (itemStr) => {
         //check wether imported or not
         if(displayString.indexOf('imported') !== -1){
             isImported = true;
-            displayString = displayString.replace(' imported ', '');
+            displayString = displayString.replace('imported ', '');
         }
 
-        item = displayString;
+        item = displayString.trim();
     
         return {
             quantity,

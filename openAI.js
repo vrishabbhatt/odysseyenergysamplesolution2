@@ -13,13 +13,10 @@ class OpenAIWrapper {
 
     async completion(content){
         try{
-            console.log('content: ', content);
             const response = await this.openAI.chat.completions.create({
                 messages: [{ role: 'user', content}],
                 model: 'gpt-4',
             });
-
-            console.log('response: ', JSON.stringify(response));
 
             const {choices} = response;
             if(!Array.isArray(choices) || choices.length === 0) throw new Error('open ai response parsing error');
@@ -27,8 +24,8 @@ class OpenAIWrapper {
             const {message} = choices[0];
             const {content: answer} = message;
             
-            console.log('response: ', JSON.stringify(response));
-            console.log('answer: ', answer);
+            // console.log('response: ', JSON.stringify(response));
+            // console.log('answer: ', answer);
             return answer;
         }
         catch(err){

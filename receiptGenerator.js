@@ -30,6 +30,7 @@ class RecieptGeneratorBase {
         this.generated = false;
         this.items = [];
         this.salesTax = 0;
+        this.importTax = 0;
         this.total = 0;
     }
 
@@ -43,12 +44,12 @@ class RecieptGeneratorBase {
                 receiptStr += `${quantity} ${(isImported)? 'imported ' : ''}${displayName}: ${total} \n`;
             });
     
-            receiptStr += `Sales Tax: ${this.salesTax} \n`;
+            receiptStr += `Sales Tax: ${this.salesTax + this.importTax} \n`;
             receiptStr += `Total:${this.total}`;
     
             console.log(receiptStr);
-            console.log("=========");
-            console.log(JSON.stringify(this.items));
+            // console.log(JSON.stringify(this.items));
+
             writeToFile(receiptStr, outputpath);
         }
         catch(err){
@@ -103,7 +104,7 @@ class RecieptGeneratorV0 extends RecieptGeneratorBase {
                     case itemTypes.medicalProducts: 
                         break;
                     default: 
-                        salesTax = limitFloatTo2(Math.ceil(itemTotalCostPT * salesTaxPercentage * 20)/20); //rounding up sales tax to the nearest .05
+                        salesTax = roundOf005(itemTotalCostPT * salesTaxPercentage); //rounding up sales tax to the nearest .05
                 }
                 
 
@@ -113,8 +114,9 @@ class RecieptGeneratorV0 extends RecieptGeneratorBase {
 
                 itemDetails.total = limitFloatTo2(itemTotalCostPT + salesTax + importTax);
                 
-                this.total += itemDetails.total;
-                this.salesTax += salesTax
+                this.total = limitFloatTo2(this.total + itemDetails.total)
+                this.importTax = limitFloatTo2(this.importTax + importTax);
+                this.salesTax = limitFloatTo2(this.salesTax + salesTax);
 
                 this.items.push(itemDetails);
             });
@@ -176,7 +178,7 @@ class RecieptGeneratorV1 extends RecieptGeneratorBase {
                     case itemTypes.medicalProducts: 
                         break;
                     default: 
-                        salesTax = limitFloatTo2(Math.ceil(itemTotalCostPT * salesTaxPercentage * 20)/20); //rounding up sales tax to the nearest .05
+                        salesTax = roundOf005(itemTotalCostPT * salesTaxPercentage); //rounding up sales tax to the nearest .05
                 }
 
                 importTax = (isImported)? roundOf005(itemTotalCostPT * importTaxPercentage) : 0;
@@ -186,8 +188,9 @@ class RecieptGeneratorV1 extends RecieptGeneratorBase {
 
                 itemDetails.total = limitFloatTo2(itemTotalCostPT + salesTax + importTax);
                 
-                this.total += itemDetails.total;
-                this.salesTax += salesTax
+                this.total = limitFloatTo2(this.total + itemDetails.total)
+                this.importTax = limitFloatTo2(this.importTax + importTax);
+                this.salesTax = limitFloatTo2(this.salesTax + salesTax);
     
                 this.items.push(itemDetails);
                 })

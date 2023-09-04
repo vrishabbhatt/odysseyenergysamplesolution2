@@ -30,7 +30,4 @@ const RecieptGenerators = require('./receiptGenerator');
     catch(err){
         console.log('main err:', err);
     }
-
-
-  
 })();
