@@ -74,6 +74,7 @@ class RecieptGeneratorV0 extends RecieptGeneratorBase {
 
     generate(input){
         try{
+            if(this.generated) this.clear();
             const items = input.split("\n");
             // console.log(items);
 
@@ -139,6 +140,7 @@ class RecieptGeneratorV1 extends RecieptGeneratorBase {
 
     async generate(input){
         try{
+            if(this.generated) this.clear();
             const items = input.split("\n");
             // console.log(items);
 
